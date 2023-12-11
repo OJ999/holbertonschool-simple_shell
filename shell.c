@@ -50,7 +50,7 @@ int main(void)
         if (child_pid == 0)
         {
             /* Child process */
-            char *args[2] = {buffer, NULL};
+            char *args[] = {buffer, NULL};
             if (execve(buffer, args, NULL) == -1)
             {
                 perror("execve");
