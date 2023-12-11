@@ -50,7 +50,7 @@ int main(void)
         if (child_pid == 0)
         {
             /* Child process */
-            if (execve(buffer, NULL, NULL) == -1)
+            if (execve(buffer, (char *[]) {buffer, NULL}, NULL) == -1)
             {
                 perror("execve");
                 exit(EXIT_FAILURE);
