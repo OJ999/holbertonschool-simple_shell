@@ -8,7 +8,7 @@
 int main(void)
 {
     /* Your main shell loop and logic go here */
-    return (0);
+return (0);
 }
 
 /**
@@ -22,7 +22,7 @@ int main(void)
 int custom_function(int param1, char *param2)
 {
     /* Function implementation goes here */
-    return (0);
+return (0);
 }
 
-/* Add other functions as needed, but keep the number of functions per file <= 5 */
+/* Add functions as needed, keep functions number per file <= 5 */
