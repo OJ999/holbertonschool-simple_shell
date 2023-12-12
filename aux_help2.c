@@ -1,4 +1,7 @@
 #include "holberton.h"
+#include "alias.h"  // Include the header file where Alias type is defined
+#include <string.h>
+
 static Alias *alias_list = NULL;
 
 void displayAliases() {
