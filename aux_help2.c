@@ -1,61 +1,65 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define ALIAS_MAX 50
-#define COMMAND_MAX 100
-
-typedef struct {
-    char name[50];
-    char value[50];
-} Alias;
-
-Alias aliases[ALIAS_MAX];
-int aliasCount = 0;
+#include "holberton.h"
+static Alias *alias_list = NULL;
 
 void displayAliases() {
-    for (int i = 0; i < aliasCount; i++) {
-        printf("%s='%s'\n", aliases[i].name, aliases[i].value);
+    Alias *current = alias_list;
+
+    while (current != NULL) {
+        printf("%s='%s'\n", current->name, current->value);
+        current = current->next;
     }
 }
 
-void setAlias(char *input) {
-    char *name = strtok(input, "=");
-    char *value = strtok(NULL, "");
+Alias *findAlias(const char *name) {
+    Alias *current = alias_list;
 
-    if (name != NULL && value != NULL && aliasCount < ALIAS_MAX) {
-        strcpy(aliases[aliasCount].name, name);
-        strcpy(aliases[aliasCount].value, value);
-        aliasCount++;
+    while (current != NULL) {
+        if (strcmp(current->name, name) == 0) {
+            return current;
+        }
+        current = current->next;
+    }
+
+    return NULL;
+}
+
+void setAlias(const char *arguments) {
+    char *name;
+    char *value;
+
+    name = strtok(arguments, "=");
+    value = strtok(NULL, "=");
+
+    if (name == NULL || value == NULL) {
+        printf("Usage: alias name='value'\n");
+        return;
+    }
+
+    Alias *existingAlias = findAlias(name);
+    if (existingAlias != NULL) {
+        // Update existing alias
+        strcpy(existingAlias->value, value);
     } else {
-        fprintf(stderr, "Error: Invalid alias format\n");
+        // Create a new alias
+        Alias *newAlias = (Alias *)malloc(sizeof(Alias));
+        if (newAlias != NULL) {
+            strcpy(newAlias->name, name);
+            strcpy(newAlias->value, value);
+            newAlias->next = alias_list;
+            alias_list = newAlias;
+        }
     }
 }
 
-int main() {
-    char command[COMMAND_MAX];
+void freeAliases() {
+    Alias *current = alias_list;
+    Alias *next;
 
-    while (1) {
-        printf("$ ");
-        if (fgets(command, COMMAND_MAX, stdin) == NULL) {
-            break; // End of file (Ctrl+D)
-        }
-
-        // Remove newline character
-        command[strcspn(command, "\n")] = '\0';
-
-        if (strncmp(command, "alias", 5) == 0) {
-            char *arguments = command + 5;
-            if (strlen(arguments) > 0) {
-                setAlias(arguments);
-            } else {
-                displayAliases();
-            }
-        } else {
-            // Handle other commands
-            printf("Executing: %s\n", command);
-        }
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
     }
 
-    return 0;
+    alias_list = NULL;
 }
