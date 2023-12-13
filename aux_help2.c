@@ -93,7 +93,7 @@ void handle_alias(char *args) {
     }
 
     /* Free allocated memory */
-    for (int i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         free(aliases[i].name);
         free(aliases[i].value);
     }
