@@ -58,6 +58,8 @@ void handle_alias(char *args) {
     Alias *aliases = NULL;
     char *equal_sign;  /* Move this declaration outside the loop */
 
+    int i;  /* Declare 'i' outside the loop */
+
     token = strtok_r(args, " \t\n", &saveptr);
 
     equal_sign = NULL;  /* Initialize outside the loop */
