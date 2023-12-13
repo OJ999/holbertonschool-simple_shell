@@ -60,6 +60,8 @@ void handle_alias(char *args) {
 
     token = strtok_r(args, " \t\n", &saveptr);
 
+    equal_sign = NULL;  /* Initialize outside the loop */
+
     while (token != NULL) {
         if (strcmp(token, "alias") == 0) {
             /* Skip the initial 'alias' keyword */
