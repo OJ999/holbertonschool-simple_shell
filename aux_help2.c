@@ -56,6 +56,8 @@ void handle_alias(char *args) {
 
     token = strtok_r(args, " \t\n", &saveptr);
 
+    char *equal_sign;  // Move this declaration outside the loop
+
     while (token != NULL) {
         if (strcmp(token, "alias") == 0) {
             /* Skip the initial 'alias' keyword */
@@ -64,8 +66,7 @@ void handle_alias(char *args) {
         }
 
         /* Check if the token contains '=' */
-        char *equal_sign;
-        equal_sign = strchr(token, '=');
+        equal_sign = strchr(token, '=');  // Move this inside the loop
 
         if (equal_sign != NULL) {
             /* Token is in the form 'name=value' */
