@@ -14,6 +14,7 @@ typedef struct Alias {
 /* Function to print aliases */
 void print_aliases(Alias *aliases, int count) {
     int i;
+
     for (i = 0; i < count; i++) {
         printf("%s='%s'\n", aliases[i].name, aliases[i].value);
     }
@@ -22,11 +23,13 @@ void print_aliases(Alias *aliases, int count) {
 /* Function to find an alias by name */
 int find_alias_index(Alias *aliases, int count, const char *name) {
     int i;
+
     for (i = 0; i < count; i++) {
         if (strcmp(aliases[i].name, name) == 0) {
             return i;
         }
     }
+
     return -1;
 }
 
@@ -53,10 +56,9 @@ void handle_alias(char *args) {
     char *saveptr;
     int count = 0;
     Alias *aliases = NULL;
+    char *equal_sign;  /* Move this declaration outside the loop */
 
     token = strtok_r(args, " \t\n", &saveptr);
-
-    char *equal_sign;  // Move this declaration outside the loop
 
     while (token != NULL) {
         if (strcmp(token, "alias") == 0) {
@@ -66,7 +68,7 @@ void handle_alias(char *args) {
         }
 
         /* Check if the token contains '=' */
-        equal_sign = strchr(token, '=');  // Move this inside the loop
+        equal_sign = strchr(token, '=');  /* Move this inside the loop */
 
         if (equal_sign != NULL) {
             /* Token is in the form 'name=value' */
