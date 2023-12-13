@@ -226,6 +226,8 @@ void aux_help_exit(void);
 void aux_help(void);
 void aux_help_alias(void);
 void aux_help_cd(void);
+size_t _strlen(const char *s);
+
 
 /* get_help.c */
 int get_help(data_shell *datash);
