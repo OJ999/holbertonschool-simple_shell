@@ -1,5 +1,5 @@
 #include "holberton.h"
-#include "alias.h"  // Include the header file where Alias type is defined
+#include "alias.h"  /* Include the header file where Alias type is defined */
 #include <string.h>
 
 static Alias *alias_list = NULL;
@@ -40,10 +40,10 @@ void setAlias(const char *arguments) {
 
     Alias *existingAlias = findAlias(name);
     if (existingAlias != NULL) {
-        // Update existing alias
+        /* Update existing alias */
         strcpy(existingAlias->value, value);
     } else {
-        // Create a new alias
+        /* Create a new alias */
         Alias *newAlias = (Alias *)malloc(sizeof(Alias));
         if (newAlias != NULL) {
             strcpy(newAlias->name, name);
