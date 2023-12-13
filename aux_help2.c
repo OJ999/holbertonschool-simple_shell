@@ -13,14 +13,16 @@ typedef struct Alias {
 
 /* Function to print aliases */
 void print_aliases(Alias *aliases, int count) {
-    for (int i = 0; i < count; i++) {
+    int i;
+    for (i = 0; i < count; i++) {
         printf("%s='%s'\n", aliases[i].name, aliases[i].value);
     }
 }
 
 /* Function to find an alias by name */
 int find_alias_index(Alias *aliases, int count, const char *name) {
-    for (int i = 0; i < count; i++) {
+    int i;
+    for (i = 0; i < count; i++) {
         if (strcmp(aliases[i].name, name) == 0) {
             return i;
         }
@@ -31,7 +33,7 @@ int find_alias_index(Alias *aliases, int count, const char *name) {
 /* Function to add or update an alias */
 void add_alias(Alias **aliases, int *count, const char *name, const char *value) {
     int index = find_alias_index(*aliases, *count, name);
-    
+
     if (index != -1) {
         /* Update existing alias */
         free((*aliases)[index].value);
