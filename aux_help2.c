@@ -64,7 +64,8 @@ void handle_alias(char *args) {
         }
 
         /* Check if the token contains '=' */
-        char *equal_sign = strchr(token, '=');
+        char *equal_sign;
+        equal_sign = strchr(token, '=');
 
         if (equal_sign != NULL) {
             /* Token is in the form 'name=value' */
@@ -92,4 +93,11 @@ void handle_alias(char *args) {
         free(aliases[i].value);
     }
     free(aliases);
+}
+
+/* Rest of your code (aux_help(), aux_help_alias(), aux_help_cd(), etc.) */
+
+int main(void) {
+    /* Your main function logic */
+    return 0;
 }
