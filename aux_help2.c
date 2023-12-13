@@ -101,8 +101,3 @@ void handle_alias(char *args) {
 }
 
 /* Rest of your code (aux_help(), aux_help_alias(), aux_help_cd(), etc.) */
-
-int main(void) {
-    /* Your main function logic */
-    return 0;
-}
