@@ -1,68 +1,40 @@
 #include "holberton.h"
-#include "alias.h"  /* Include the header file where Alias type is defined */
-#include <string.h>
 
-static Alias *alias_list = NULL;
+/**
+ * aux_help - Help information for the builtin help.
+ * Return: no return
+ */
+void aux_help(void)
+{
+    char *help = "help: help [-dms] [pattern ...]\n";
 
-void displayAliases() {
-    Alias *current = alias_list;
-
-    while (current != NULL) {
-        printf("%s='%s'\n", current->name, current->value);
-        current = current->next;
-    }
+    write(STDOUT_FILENO, help, _strlen(help));
+    help = "\tDisplay information about builtin commands.\n ";
+    write(STDOUT_FILENO, help, _strlen(help));
+    help = "Displays brief summaries of builtin commands.\n";
+    write(STDOUT_FILENO, help, _strlen(help));
 }
+/**
+ * aux_help_alias - Help information for the builtin alias.
+ * Return: no return
+ */
+void aux_help_alias(void)
+{
+    char *help = "alias: alias [-p] [name[=value]...]\n";
 
-Alias *findAlias(const char *name) {
-    Alias *current = alias_list;
-
-    while (current != NULL) {
-        if (strcmp(current->name, name) == 0) {
-            return current;
-        }
-        current = current->next;
-    }
-
-    return NULL;
+    write(STDOUT_FILENO, help, _strlen(help));
+    help = "\tDefine or display aliases.\n ";
+    write(STDOUT_FILENO, help, _strlen(help));
 }
+/**
+ * aux_help_cd - Help information for the builtin alias.
+ * Return: no return
+ */
+void aux_help_cd(void)
+{
+    char *help = "cd: cd [-L|[-P [-e]] [-@]] [dir]\n";
 
-void setAlias(const char *arguments) {
-    char *name;
-    char *value;
-
-    name = strtok(arguments, "=");
-    value = strtok(NULL, "=");
-
-    if (name == NULL || value == NULL) {
-        printf("Usage: alias name='value'\n");
-        return;
-    }
-
-    Alias *existingAlias = findAlias(name);
-    if (existingAlias != NULL) {
-        /* Update existing alias */
-        strcpy(existingAlias->value, value);
-    } else {
-        /* Create a new alias */
-        Alias *newAlias = (Alias *)malloc(sizeof(Alias));
-        if (newAlias != NULL) {
-            strcpy(newAlias->name, name);
-            strcpy(newAlias->value, value);
-            newAlias->next = alias_list;
-            alias_list = newAlias;
-        }
-    }
-}
-
-void freeAliases() {
-    Alias *current = alias_list;
-    Alias *next;
-
-    while (current != NULL) {
-        next = current->next;
-        free(current);
-        current = next;
-    }
-
-    alias_list = NULL;
+    write(STDOUT_FILENO, help, _strlen(help));
+    help = "\tChange the shell working directory.\n ";
+    write(STDOUT_FILENO, help, _strlen(help));
 }
